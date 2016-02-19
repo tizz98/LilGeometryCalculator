@@ -11,13 +11,13 @@
     End Sub
 
     Private Sub rdoConvertUS_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConvertUS.CheckedChanged
-        If rdoConvertUS.Checked Then
+        If rdoConvertUS.Checked And Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             txtAnswer.Text = currentFormula.convertMetricToUs(Convert.ToDouble(txtAnswer.Text))
         End If
     End Sub
 
     Private Sub rdoMetric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMetric.CheckedChanged
-        If rdoMetric.Checked Then
+        If rdoMetric.Checked And Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             txtAnswer.Text = currentFormula.convertUsToMetric(Convert.ToDouble(txtAnswer.Text))
         End If
     End Sub
@@ -105,5 +105,15 @@
 
         rdoConvertUS.Text = currentFormula.getUsUnitName()
         rdoMetric.Text = currentFormula.getMetricUnitName()
+    End Sub
+
+    Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
+        ' numba crunchin time
+        Dim input1 As Double = Convert.ToDouble(txtTopInput.Text)
+        Dim input2 As Double = Convert.ToDouble(txtMiddleInput.Text)
+        Dim input3 As Double = Convert.ToDouble(txtBottomInput.Text)
+
+        currentFormula.setFormulaInputs(input1, input2, input3)
+        txtAnswer.Text = currentFormula.calculateAnswer()
     End Sub
 End Class

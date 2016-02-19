@@ -48,7 +48,7 @@
     End Sub
 
     Public Sub New(name As String, numInputs As Integer,
-                   formulaFunc2Input As Func(Of Double, Double), cDim As ConversionType)
+                   formulaFunc1Input As Func(Of Double, Double), cDim As ConversionType)
         Me.New(name, numInputs, cDim)
         Me.formulaFunc1Input = formulaFunc1Input
     End Sub
