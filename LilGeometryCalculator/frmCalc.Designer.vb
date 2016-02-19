@@ -105,9 +105,8 @@ Partial Class frmCalc
         Me.rdoMetric.AutoSize = True
         Me.rdoMetric.Location = New System.Drawing.Point(106, 15)
         Me.rdoMetric.Name = "rdoMetric"
-        Me.rdoMetric.Size = New System.Drawing.Size(66, 17)
+        Me.rdoMetric.Size = New System.Drawing.Size(14, 13)
         Me.rdoMetric.TabIndex = 1
-        Me.rdoMetric.Text = "METRIC"
         Me.rdoMetric.UseVisualStyleBackColor = True
         '
         'rdoConvertUS
@@ -116,10 +115,9 @@ Partial Class frmCalc
         Me.rdoConvertUS.Checked = True
         Me.rdoConvertUS.Location = New System.Drawing.Point(12, 15)
         Me.rdoConvertUS.Name = "rdoConvertUS"
-        Me.rdoConvertUS.Size = New System.Drawing.Size(47, 17)
+        Me.rdoConvertUS.Size = New System.Drawing.Size(14, 13)
         Me.rdoConvertUS.TabIndex = 0
         Me.rdoConvertUS.TabStop = True
-        Me.rdoConvertUS.Text = "USA"
         Me.rdoConvertUS.UseVisualStyleBackColor = True
         '
         'txtAnswer
