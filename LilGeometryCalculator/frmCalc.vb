@@ -1,7 +1,9 @@
-﻿Public Class frmCalc
+﻿Imports System.ComponentModel
+
+Public Class frmCalc
     Private shapes As New List(Of Shape)
-    Private currentShape As Shape
-    Private currentFormula As Formula
+    Private currentShape As Shape = Nothing
+    Private currentFormula As Formula = Nothing
 
     Private Sub frmCalc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         modFixtureData.setupData()
@@ -62,6 +64,7 @@
         currentShape = (From shape In shapes Where shape.name = lstShape.SelectedItem Select shape).First
         lstFormula.Items.Clear()
         lstFormula.Items.AddRange((From frmla In currentShape.formulas Select frmla.name).ToArray())
+        picDiagram.ImageLocation = currentShape.imgPath
     End Sub
 
     Private Sub lstFormula_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstFormula.SelectedIndexChanged
@@ -103,17 +106,80 @@
     Private Sub btnClearValue_Click(sender As Object, e As EventArgs) Handles btnClearValue.Click
         resetInputValues()
 
-        rdoConvertUS.Text = currentFormula.getUsUnitName()
-        rdoMetric.Text = currentFormula.getMetricUnitName()
+        If Not IsNothing(currentFormula) Then
+            rdoConvertUS.Text = currentFormula.getUsUnitName()
+            rdoMetric.Text = currentFormula.getMetricUnitName()
+        End If
     End Sub
 
     Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
-        ' numba crunchin time
-        Dim input1 As Double = Convert.ToDouble(txtTopInput.Text)
-        Dim input2 As Double = Convert.ToDouble(txtMiddleInput.Text)
-        Dim input3 As Double = Convert.ToDouble(txtBottomInput.Text)
+        If Not IsNothing(currentFormula) Then
+            ' numba crunchin time
+            Dim input1 As Double = Convert.ToDouble(txtTopInput.Text)
+            Dim input2 As Double = Convert.ToDouble(txtMiddleInput.Text)
+            Dim input3 As Double = Convert.ToDouble(txtBottomInput.Text)
 
-        currentFormula.setFormulaInputs(input1, input2, input3)
-        txtAnswer.Text = currentFormula.calculateAnswer()
+            currentFormula.setFormulaInputs(input1, input2, input3)
+            txtAnswer.Text = currentFormula.calculateAnswer()
+        End If
+    End Sub
+
+    Private Sub appendCharToTextBox(chr As String)
+        If Not IsNothing(currentFormula) And txtTopInput.Visible Then
+            txtTopInput.Text &= chr
+        End If
+    End Sub
+
+    Private Sub btnDecimal_Click(sender As Object, e As EventArgs) Handles btnDecimal.Click
+        appendCharToTextBox(".")
+    End Sub
+
+    Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
+        appendCharToTextBox("0")
+    End Sub
+
+    Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
+        appendCharToTextBox("1")
+    End Sub
+
+    Private Sub btn2_Click(sender As Object, e As EventArgs) Handles btn2.Click
+        appendCharToTextBox("2")
+    End Sub
+
+    Private Sub btn3_Click(sender As Object, e As EventArgs) Handles btn3.Click
+        appendCharToTextBox("3")
+    End Sub
+
+    Private Sub btn4_Click(sender As Object, e As EventArgs) Handles btn4.Click
+        appendCharToTextBox("4")
+    End Sub
+
+    Private Sub btn5_Click(sender As Object, e As EventArgs) Handles btn5.Click
+        appendCharToTextBox("5")
+    End Sub
+
+    Private Sub btn6_Click(sender As Object, e As EventArgs) Handles btn6.Click
+        appendCharToTextBox("6")
+    End Sub
+
+    Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
+        appendCharToTextBox("7")
+    End Sub
+
+    Private Sub btn8_Click(sender As Object, e As EventArgs) Handles btn8.Click
+        appendCharToTextBox("8")
+    End Sub
+
+    Private Sub btn9_Click(sender As Object, e As EventArgs) Handles btn9.Click
+        appendCharToTextBox("9")
+    End Sub
+
+    Private Sub frmCalc_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
+            If Not MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes!",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
+                e.Cancel = True
+            End If
+        End If
     End Sub
 End Class
