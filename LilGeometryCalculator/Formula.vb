@@ -1,9 +1,9 @@
 ﻿Public Class Formula
     Public name As String
 
-    Private formulaFunc3Input As Func(Of Double, Double, Double, Double)
-    Private formulaFunc2Input As Func(Of Double, Double, Double)
-    Private formulaFunc1Input As Func(Of Double, Double)
+    Public formulaFunc3Input As Func(Of Double, Double, Double, Double)
+    Public formulaFunc2Input As Func(Of Double, Double, Double)
+    Public formulaFunc1Input As Func(Of Double, Double)
 
     Public MetricToUsConversionFunc As Func(Of Double, Double)
     Public UsToMetricConversionFunc As Func(Of Double, Double)
@@ -13,15 +13,15 @@
 
     Private conversionDimension As ConversionType
 
-    Private formulaInput1 As Double
-    Private formulaInput2 As Double  ' may not be used
-    Private formulaInput3 As Double  ' may not be used
+    Public formulaInput1 As Double
+    Public formulaInput2 As Double  ' may not be used
+    Public formulaInput3 As Double  ' may not be used
 
-    Private numInputs As Integer
+    Public numInputs As Integer
 
-    Private input1Name As String
-    Private input2Name As String  ' may not be used
-    Private input3Name As String  ' may not be used
+    Public input1Name As String
+    Public input2Name As String  ' may not be used
+    Public input3Name As String  ' may not be used
 
     Public Enum ConversionType
         dimen1
@@ -117,5 +117,31 @@
         End Select
 
         Return us
+    End Function
+
+    Public Function getUsUnitName() As String
+        Select Case Me.conversionDimension
+            Case ConversionType.dimen1
+                Return "inch"
+            Case ConversionType.dimen2
+                Return "sq in"
+            Case ConversionType.dimen3
+                Return "cu in"
+        End Select
+
+        Return Nothing
+    End Function
+
+    Public Function getMetricUnitName() As String
+        Select Case Me.conversionDimension
+            Case ConversionType.dimen1
+                Return "cm"
+            Case ConversionType.dimen2
+                Return "sq cm"
+            Case ConversionType.dimen3
+                Return "cu cm"
+        End Select
+
+        Return Nothing
     End Function
 End Class
