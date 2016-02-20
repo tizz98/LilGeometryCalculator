@@ -1,4 +1,6 @@
-﻿Public Class frmCalcContainer
+﻿Imports System.ComponentModel
+
+Public Class frmCalcContainer
     Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
         Dim aboutForm As New frmAbout()
         aboutForm.ShowDialog()
@@ -24,5 +26,23 @@
 
     Private Sub mnuWindowCascade_Click(sender As Object, e As EventArgs) Handles mnuWindowCascade.Click
         Me.LayoutMdi(MdiLayout.Cascade)
+    End Sub
+
+    Private Sub frmCalcContainer_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim quit As Boolean = True
+
+        For Each calc As frmCalc In Me.MdiChildren
+            If Not String.IsNullOrWhiteSpace(calc.txtAnswer.Text) Then
+                If MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes!",
+                                                      MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
+                    calc.txtAnswer.Text = Nothing
+                    calc.Close()
+                Else
+                    quit = False
+                End If
+            End If
+        Next
+
+        e.Cancel = Not quit
     End Sub
 End Class

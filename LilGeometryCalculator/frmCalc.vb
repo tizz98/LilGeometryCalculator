@@ -55,6 +55,9 @@ Public Class frmCalc
         lblBottomInput.Hide()
         txtBottomInput.Hide()
 
+        rdoMetric.Checked = False
+        rdoConvertUS.Checked = True
+
         resetInputValues()
     End Sub
 
@@ -174,11 +177,26 @@ Public Class frmCalc
         appendCharToTextBox("9")
     End Sub
 
-    Private Sub frmCalc_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub frmCalc_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If e.CloseReason = CloseReason.MdiFormClosing Then
+            Return
+        End If
+
         If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             If Not MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes!",
                                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
+                ' Cancel
                 e.Cancel = True
+            End If
+        End If
+
+        If Not e.Cancel Then
+            ' Close form
+            Me.txtAnswer.Text = Nothing
+
+            ' Just this form so close the parent too
+            If Me.MdiParent.MdiChildren.Count = 1 Then
+                Me.MdiParent.Close()
             End If
         End If
     End Sub
