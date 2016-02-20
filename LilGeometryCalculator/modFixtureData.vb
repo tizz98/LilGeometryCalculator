@@ -1,7 +1,12 @@
 ﻿Module modFixtureData
-    Public shapes As List(Of Shape)
+    Public shapes As List(Of Shape) = Nothing
 
     Public Sub setupData()
+        ' Only setup data once
+        If Not IsNothing(shapes) Then
+            Return
+        End If
+
         shapes = New List(Of Shape)
 
         Dim shp As Shape
