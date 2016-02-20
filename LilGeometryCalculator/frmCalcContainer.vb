@@ -22,6 +22,7 @@
 Imports System.ComponentModel
 
 Public Class frmCalcContainer
+    Private calcNum As Integer = 0
 
     '------------------------------------------------------------
     '-           Subprogram Name: mnuHelpAbout_Click            -
@@ -87,7 +88,8 @@ Public Class frmCalcContainer
     '- calc - A frmCalc object that is created then shown       -
     '------------------------------------------------------------
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
-        Dim calc As New frmCalc()
+        calcNum += 1
+        Dim calc As New frmCalc(calcNum)
         calc.MdiParent = Me
         calc.Show()
     End Sub
@@ -184,7 +186,7 @@ Public Class frmCalcContainer
 
         For Each calc As frmCalc In Me.MdiChildren
             If Not String.IsNullOrWhiteSpace(calc.txtAnswer.Text) Then
-                If MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes!",
+                If MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes! (" & calc.Text & ")",
                                                       MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
                     calc.txtAnswer.Text = Nothing
                     calc.Close()

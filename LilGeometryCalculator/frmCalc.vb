@@ -16,6 +16,31 @@ Public Class frmCalc
     Private currentFormula As Formula = Nothing
 
     '------------------------------------------------------------
+    '-                   Subprogram Name: New                   -
+    '------------------------------------------------------------
+    '-                Written By: Elijah Wilson                 -
+    '-                  Written On: 02/20/2016                  -
+    '------------------------------------------------------------
+    '- Subprogram Purpose:                                      -
+    '-                                                          -
+    '- Create a new frmCalc object                              -
+    '------------------------------------------------------------
+    '- Parameter Dictionary (in parameter order):               -
+    '- number - Number to be used in the title                  -
+    '------------------------------------------------------------
+    '- Local Variable Dictionary (alphabetically):              -
+    '- (None)                                                   -
+    '------------------------------------------------------------
+    Public Sub New(number As Integer)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Me.Text = "Calculator - " & number
+    End Sub
+
+    '------------------------------------------------------------
     '-              Subprogram Name: frmCalc_Load               -
     '------------------------------------------------------------
     '-                Written By: Elijah Wilson                 -
@@ -634,7 +659,7 @@ Public Class frmCalc
         End If
 
         If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            If Not MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes!",
+            If Not MessageBox.Show("Are you sure you want to quit?", "You have unsaved changes! (" & Me.Text & ")",
                                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
                 ' Cancel
                 e.Cancel = True
