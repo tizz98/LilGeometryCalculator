@@ -1,6 +1,37 @@
-﻿Module modFixtureData
+﻿'------------------------------------------------------------
+'-               File Name: modFixtureData.vb               -
+'-                 Part of Project: Assign6                 -
+'------------------------------------------------------------
+'-                Written By: Elijah Wilson                 -
+'-                  Written On: 02/20/2016                  -
+'------------------------------------------------------------
+'- File Purpose:                                            -
+'-                                                          -
+'- Contains fixture data to be used for the default         -
+'- calculator form. Shapes and their formula.               -
+'------------------------------------------------------------
+Module modFixtureData
     Public shapes As List(Of Shape) = Nothing
 
+    '------------------------------------------------------------
+    '-                Subprogram Name: setupData                -
+    '------------------------------------------------------------
+    '-                Written By: Elijah Wilson                 -
+    '-                  Written On: 02/20/2016                  -
+    '------------------------------------------------------------
+    '- Subprogram Purpose:                                      -
+    '-                                                          -
+    '- Sets up the shapes data.                                 -
+    '------------------------------------------------------------
+    '- Parameter Dictionary (in parameter order):               -
+    '- (None)                                                   -
+    '------------------------------------------------------------
+    '- Local Variable Dictionary (alphabetically):              -
+    '- frmla - A Formula object used a temporary holder of a    -
+    '-         Formula                                          -
+    '- shp - A Shape object used as a temporary holder of a     -
+    '-       Shape                                              -
+    '------------------------------------------------------------
     Public Sub setupData()
         ' Only setup data once
         If Not IsNothing(shapes) Then
