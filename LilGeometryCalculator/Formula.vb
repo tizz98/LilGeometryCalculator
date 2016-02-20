@@ -59,14 +59,6 @@
         Me.formulaInput3 = input3
     End Sub
 
-    Public Sub setFormulaInputs(input1 As Double, input2 As Double)
-        setFormulaInputs(input1, input2, -1)
-    End Sub
-
-    Public Sub setFormulaInputs(input1 As Double)
-        setFormulaInputs(input1, -1, -1)
-    End Sub
-
     Public Sub setFormulaInputNames(name1 As String, name2 As String, name3 As String)
         Me.input1Name = name1
         Me.input2Name = name2

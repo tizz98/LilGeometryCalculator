@@ -1,6 +1,4 @@
-﻿Imports System.Math
-
-Module modFixtureData
+﻿Module modFixtureData
     Public shapes As List(Of Shape)
 
     Public Sub setupData()
